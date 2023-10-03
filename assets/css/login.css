@@ -1,0 +1,23 @@
+/* Mantener la imagen de fondo */
+.page-header {
+    background-image: url('https://img.freepik.com/foto-gratis/vista-angulo-alto-hombre-recortado-que-llena-calendario-linea_1098-20531.jpg?w=360&t=st=1695737735~exp=1695738335~hmac=6785bbbf9cd1bf0232ad567c7906e77bf1852644783a29d12838ccb73abd5ab7');
+    background-size: cover;
+  }
+  
+  /* Fondo azul para el encabezado */
+  .card-header {
+    background-color: #596CFF; /* Cambia esto al color de fondo azul que desees */
+    border-radius: 10px 10px 0 0; /* Redondea solo las esquinas superiores */
+  }
+  
+  /* Fondo blanco para el cuerpo del formulario */
+  .card-body {
+    background-color: white;
+    border-radius: 0 0 10px 10px; /* Redondea solo las esquinas inferiores */
+  }
+  
+  /* Estilo redondeado para los campos de entrada */
+  .form-control {
+    border-radius: 10px; /* Redondea todos los campos de entrada */
+  }
+  
