@@ -98,27 +98,12 @@
       </div>
       <div class="card card-body mx-3 mx-md-4 mt-n6">
         <div class="row gx-4 mb-2">
-          <div class="col-auto">
-            <div class="avatar avatar-xl position-relative">
-              <img src="https://img.freepik.com/psd-gratis/ilustracion-3d-avatar-o-perfil-humano_23-2150671128.jpg?w=740&t=st=1696342946~exp=1696343546~hmac=c53af74de0a18a4f2393816c0ac8bd207fd35e9b21d0257c2224923ea72f0036" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-            </div>
-          </div>
-          <div class="col-auto my-auto">
-            <div class="h-100">
-              <h5 class="mb-1">
-                <span id="name"></span>
-                <button id="editar-profile" onclick="mostrarFormularioEdicion()">Editar</button>
-              </h5>
-            </div>
-          </div>
-          <!-- <div id="formulario-edicion" style="display: none;">
-            <form>
-              <input type="text" id="newName" placeholder="Nombre">
-              <input type="text" id="newEmail" placeholder="Email">
-              <input type="text" id="newUser" placeholder="Usuario">
-              <button onclick="editar_guardar()" type="submit">Guardar Cambios</button>
-          </form>          
-          </div> -->
+
+          <form id="formulario-imagen">
+            <input type="file" name="imagen" id="img">
+            <button type="button" onclick="subir_imagen()">Aceptar</button>
+        </form>
+        <img id="imagenPerfil" src="" alt="Imagen de perfil">
           <div id="formulario-edicion" style="display: none;">
           <form role="form">
             <div>
@@ -134,12 +119,24 @@
               <input id="newUser" type="text">
             </div>
             <div>
+              <label class="form-label">Contraseña</label>
+              <input id="newPassword" type="text">
+            </div>
+            <div>
               <button type="button" onclick="editar_guardar()">Guardar cambios</button>
             </div>
-          </div>           
-
+          </form> 
+          </div>  
           <div class="card-body p-3">
             <ul class="list-group">
+              <div class="col-auto my-auto">
+                <div class="h-100">
+                  <h5 class="mb-1">
+                    <span id="name"></span>
+                    <button id="editar-profile" onclick="mostrarFormularioEdicion()">Editar</button>
+                  </h5>
+                </div>
+              </div>
               <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Usuario:</strong> <span id="user"></span></li>
               <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> <span id="email"></span></li>  
             </ul>
@@ -166,6 +163,8 @@
       <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
       <script src="../assets/js/editar_perfil.js"></script>
       <script src="../assets/js/cargarPerfil.js"></script>
+      <script src="../assets/js/subir_imagen.js"></script>
+      
     </body>
 
 </html>

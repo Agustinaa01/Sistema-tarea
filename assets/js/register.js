@@ -4,7 +4,7 @@ function register() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
-    var registroMensaje = document.getElementById('registro-mensaje'); // Obtén el elemento de mensaje
+    var registroMensaje = document.getElementById('registro-mensaje'); 
 
     var formData = {
         nombre: nombre, 

@@ -2,11 +2,11 @@ function cargarPerfil() {
     $.ajax({
         url: '../assets/ajax/procesarDatosUsuario.php',
         type: 'GET',
-        dataType: false, 
+        dataType: 'json',
         success: function (data) {
             console.log("Respuesta del servidor:", data);
-            data = JSON.parse(data);
             if (data.success) {
+                document.getElementById('imagenPerfil').src = '../assets/imgProfile/' + data.imagenPerfil;
                 document.getElementById('name').textContent = data.nombre;
                 document.getElementById('email').textContent = data.email;
                 document.getElementById('user').textContent = data.usuario;
@@ -20,3 +20,4 @@ function cargarPerfil() {
 document.addEventListener("DOMContentLoaded", function () {
     cargarPerfil();
 });
+

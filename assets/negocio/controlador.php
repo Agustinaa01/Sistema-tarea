@@ -48,9 +48,9 @@ class Controlador {
 			$usuarios = $catUsu->getUsuariosResponsables();
 			return $usuarios;
 		}
-		function editarUsuario($id, $usuario, $email, $nombree){
+		function editarUsuario($id, $usuario, $email, $nombre, $password){
 			$catUsu = new CatalogoUsuarios();
-			$usuario = $catUsu->editarUsuario($id, $usuario, $email, $nombre);
+			$usuario = $catUsu->editarUsuario($id, $usuario, $email, $nombre, $password);
 			return $usuario;
 		}
 		function datosUsuario($id){
@@ -58,7 +58,11 @@ class Controlador {
 			$usuario = $catUsu->datosUsuario($id);
 			return $usuario;
 		}
-
+		function subirImagen($id, $imagen){
+			$catUsu = new CatalogoUsuarios();
+			$usuario = $catUsu->subirImagen($id, $imagen);
+			return $usuario;
+		}
 
 
 	}

@@ -143,22 +143,24 @@ class CatalogoUsuarios {
         return $usuarios;
     }
     
-    function editarUsuario($id, $usuario, $email, $nombre)
+    function editarUsuario($id, $usuario, $email, $nombre, $password)
     {
         $conexion = new Conexion();
         $conn = $conexion->conectar();
     
-        $query = "UPDATE usuarios SET nombre = ?, usuario = ?, email = ? WHERE id = ?";
+        $hashedPassword = md5($password);
+    
+        $query = "UPDATE usuarios SET nombre = ?, usuario = ?, email = ?, password = ? WHERE id = ?";
         $stm = $conn->prepare($query);
-    
-        $stm->bind_param("sssi", $nombre, $usuario, $email, $id);
-    
+        
+        $stm->bind_param("ssssi", $nombre, $usuario, $email, $hashedPassword, $id);
+        
         $stm->execute();
     
         $stm->close();
         $conexion->desconectar($conn);
-    }
-    
+        return $usuario;
+    }    
     
     function datosUsuario($id)
     {	
@@ -182,7 +184,22 @@ class CatalogoUsuarios {
         }
         $conexion->desconectar($conn);
     }
+  
+function subirImagen($id, $imagen)
+{
+    $conexion = new Conexion();
+    $conn = $conexion->conectar();
+
+    $query = "UPDATE usuarios SET imagen = ? WHERE id = ?";
+    $stm = $conn->prepare($query);
     
-      
+    $stm->bind_param("si", $imagen, $id);
+    
+    $stm->execute();
+
+    $stm->close();
+    $conexion->desconectar($conn);
+    return $imagen;
+}     
 }
 ?>
