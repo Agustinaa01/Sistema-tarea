@@ -8,14 +8,14 @@ include_once("../negocio/controlador.php");
         $usuario = $controlador->datosUsuario($id);
     
         if ($usuario) {
-            // Ruta absoluta de destino (ajusta la ruta según tu configuración)
+
             $rutaDeDestino = __DIR__ . '/../assets/imgProfile/';
     
             if (!is_dir($rutaDeDestino)) {
                 mkdir($rutaDeDestino, 0777, true);
             }
     
-            // Nombre original de la imagen
+
             $nombreOriginal = $_FILES['imagen']['name'];
     
             $rutaDeDestinoCompleta = $rutaDeDestino . $nombreOriginal;

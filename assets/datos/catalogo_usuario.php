@@ -177,7 +177,7 @@ class CatalogoUsuarios {
         
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $usuario = new Usuario($row['id'], $row['nombre'], $row['email'], $row['usuario'], $row['imagen'], $row['password']);
+            $usuario = new Usuario($row['id'], $row['nombre'], $row['email'], $row['usuario'], $row['password'], $row['imagen']);
             return $usuario;
         } else {
             echo "No funca";

@@ -39,7 +39,7 @@ function editar_guardar() {
 function subir_imagen() {
     var formData = new FormData();
     var input = document.getElementById('img');
-
+    
     if (input.files.length > 0) {
         formData.append('imagen', input.files[0]);
 
@@ -66,8 +66,3 @@ function subir_imagen() {
         console.error("Debes seleccionar una imagen.");
     }
 }
-
-
-
-  
-

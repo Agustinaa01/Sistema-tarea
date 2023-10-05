@@ -100,10 +100,10 @@
         <div class="row gx-4 mb-2">
 
           <form id="formulario-imagen">
-            <input type="file" name="imagen" id="img">
             <button type="button" onclick="subir_imagen()">Aceptar</button>
-        </form>
-        <img id="imagenPerfil" src="" alt="Imagen de perfil">
+            <input type="file" name="imagen" id="img">
+          </form>
+        <img class="img-icon" id="imagenPerfil" src="../assets/imgProfile/<?php echo $usuario->getImagen(); ?>" alt="Imagen de perfil">
           <div id="formulario-edicion" style="display: none;">
           <form role="form">
             <div>

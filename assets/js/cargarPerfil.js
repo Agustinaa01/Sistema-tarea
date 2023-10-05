@@ -6,7 +6,8 @@ function cargarPerfil() {
         success: function (data) {
             console.log("Respuesta del servidor:", data);
             if (data.success) {
-                document.getElementById('imagenPerfil').src = '../assets/imgProfile/' + data.imagenPerfil;
+                var imagenPerfilURL = '../assets/assets/imgProfile/' + data.imagen;
+                document.getElementById('imagenPerfil').src = imagenPerfilURL;
                 document.getElementById('name').textContent = data.nombre;
                 document.getElementById('email').textContent = data.email;
                 document.getElementById('user').textContent = data.usuario;
@@ -16,6 +17,7 @@ function cargarPerfil() {
         }
     });
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
     cargarPerfil();

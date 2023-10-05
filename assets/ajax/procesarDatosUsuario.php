@@ -15,7 +15,8 @@ if (isset($_SESSION['id'])) {
             'success' => true,
             'nombre' => $usuario->getNombre(),
             'email' => $usuario->getEmail(),
-            'usuario' => $usuario->getUsuario()
+            'usuario' => $usuario->getUsuario(),
+            'imagen' => $usuario->getImagen()
         ];
         echo json_encode($response);
     } else {

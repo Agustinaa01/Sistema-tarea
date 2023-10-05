@@ -28054,5 +28054,13 @@ pre[class*="language-"] {
     overflow: auto !important;
   }
 }
+.img-icon{
+  width: 200px;
+  border-radius: 30px;
+  margin-left: 10px;
+  padding: 8px;
+  border: 1px solid black;
+}
+
 
 /*# sourceMappingURL=dashboard-free.css.map */
