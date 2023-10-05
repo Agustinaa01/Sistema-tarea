@@ -22,6 +22,7 @@ function editar_guardar() {
         contentType: 'application/json', // Set content type
         success: function (response) {
             var data = JSON.parse(response);
+            
             document.getElementById('name').textContent = data.nombre;
             document.getElementById('email').textContent = data.email;
             document.getElementById('user').textContent = data.usuario;
@@ -39,7 +40,7 @@ function editar_guardar() {
 function subir_imagen() {
     var formData = new FormData();
     var input = document.getElementById('img');
-    
+
     if (input.files.length > 0) {
         formData.append('imagen', input.files[0]);
 
