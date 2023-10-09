@@ -1,4 +1,4 @@
-function cargarPerfil() {
+function cargarPerfil(callback) {
     $.ajax({
         url: '../assets/ajax/procesarDatosUsuario.php',
         type: 'GET',
@@ -11,13 +11,16 @@ function cargarPerfil() {
                 document.getElementById('name').textContent = data.nombre;
                 document.getElementById('email').textContent = data.email;
                 document.getElementById('user').textContent = data.usuario;
+                
+                if (typeof callback === 'function') {
+                    callback(data); 
+                }
             } else {
                 console.log("Error: " + data.message);
             }
         }
     });
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
     cargarPerfil();

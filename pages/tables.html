@@ -24,6 +24,7 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -43,7 +44,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/dashboard.html">
+          <a class="nav-link text-white " href="../pages/crear_tarea.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -102,47 +103,86 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Titulo</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Descripcion
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Descripcion</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Responsable
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Responsable</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Vencimiento</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Terminado</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Integrantes</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar
+                        Vencimiento
                       </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Terminado
+                      </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Integrantes
+                      </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
+                      <td id="newTitle"></td>
+                      <td id="newDesc"></td>
+                      <td id="newResp"></td>
+                      <td id="newFecha"></td>
+                      <td class="text-center">
+                        <input type="checkbox" id="checkbox1">
+                      </td>
+                      <td class="text-center">
+                        <select id="usuarios-select" class="text-secondary text-xs font-weight-bold">
+                          <option value="usuario1">Usuario 1</option>
+                          <option value="usuario2">Usuario 2</option>
+                          <option value="usuario3">Usuario 3</option>
+                        </select>
+                        <button type="button" class="text-secondary text-xs font-weight-bold" onclick="agregarUsuario()">Agregar</button>
+                        <details>
+                          <summary>Usuario agregado:</summary>
+                          <span id="usuarioAgregado"></span>
+                        </details>
+                      </td>
+                      <td class="text-center">
+                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                          data-original-title="Editar tarea">
+                          Editar
+                        </a>
+                      </td>
+                    </tr>
+                    <!-- Add more rows if needed -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+                    <!-- <tr>
 
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Editar Tareas</h6>
+                            <h6 id="newTitle" class="mb-0 text-sm">Editar Tareas</h6>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">Hacer...</p>
+                        <p id="newDesc" class="text-xs font-weight-bold mb-0">Hacer...</p>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-blue rounded-pill">Fran</span>
+                        <span id="newResp" class="badge badge-sm bg-blue rounded-pill">Fran</span>
                       </td>                      
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">10/03/18</span>
+                        <span id="newFecha" class="text-secondary text-xs font-weight-bold">10/03/18</span>
                       </td>
                       <td class="align-middle text-center">
                         <input class="text-secondary text-xs font-weight-bold" type="checkbox" id="checkbox1">
                       </td>
                       <td class="align-middle text-center">
                         <select id="usuarios-select" class="text-secondary text-xs font-weight-bold">
-                          <option value="usuario1">Usuario 1</option>
-                          <option value="usuario2">Usuario 2</option>
-                          <option value="usuario3">Usuario 3</option>
+                          <option id="newUser" value="usuario1">Usuario 1</option>
+                          <option id="newUser" value="usuario2">Usuario 2</option>
+                          <option id="newUser" value="usuario3">Usuario 3</option>
                         </select>
                         <button type="submit" class="text-secondary text-xs font-weight-bold">Agregar</button>
                         <details>
@@ -159,8 +199,8 @@
                         </a>
                       </td>
 
-                    </tr>
-                    <tr>
+                    </tr> -->
+                    <!-- <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
@@ -326,8 +366,8 @@
                           Edit
                         </a>
                       </td>
-                    </tr>
-                    <tr>
+                    </tr> -->
+                    <!-- <tr>
 
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -367,8 +407,8 @@
                           data-original-title="Edit user">
                           Edit
                         </a>
-                      </td>
-
+                      </td> -->
+<!-- 
                     </tr>
                   </tbody>
                 </table>
@@ -376,7 +416,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
         <!-- End Toggle Button -->
       </div>
       <hr class="horizontal dark my-1">
@@ -387,6 +427,8 @@
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/cargarTarea.js"></script>
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

@@ -1,18 +1,26 @@
 function mostrarFormularioEdicion() {
     var formularioEdicion = document.getElementById('formulario-edicion');
     formularioEdicion.style.display = 'block';
+
+    cargarPerfil(function (data) {
+        document.getElementById('newName').value = data.nombre;
+        document.getElementById('newEmail').value = data.email;
+        document.getElementById('newUser').value = data.usuario;
+    });
 }
+
+
 function editar_guardar() { 
     var newName = document.getElementById('newName').value;
     var newEmail = document.getElementById('newEmail').value;
     var newUser = document.getElementById('newUser').value;
     var newPassword = document.getElementById('newPassword').value;
-
+   
     var formData = {
         nombre: newName,
         email: newEmail,
         usuario: newUser,
-        password: newPassword
+        password: newPassword,
     };    
 
     $.ajax({
@@ -22,15 +30,13 @@ function editar_guardar() {
         contentType: 'application/json', // Set content type
         success: function (response) {
             var data = JSON.parse(response);
-            
+            cargarPerfil();
             document.getElementById('name').textContent = data.nombre;
             document.getElementById('email').textContent = data.email;
             document.getElementById('user').textContent = data.usuario;
-
+            
             var formularioEdicion = document.getElementById('formulario-edicion');
             formularioEdicion.style.display = 'none';
-
-            cargarPerfil();
         },
         error: function (error) {
             console.error("Error:", error);

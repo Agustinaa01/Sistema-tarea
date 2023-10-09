@@ -57,9 +57,27 @@ class CatalogoTarea {
         
         return $result;
     }	
-
-
-
-
+	function datosTarea()
+    {	
+        $conexion = new Conexion();
+        $conn = $conexion->conectar();
+        
+        $query = "SELECT * FROM tareas";   
+        $stm = $conn->prepare($query);
+        
+        // $stm->bind_param("i", $id);
+         
+        $stm->execute();
+        $result = $stm->get_result();
+        
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+			$tarea = new Tarea($row['id'], $row['titulo'], $row['descripcion'], $row['fecha_venc'], $row['responsable'], $row['estado']);
+            return $tarea;
+        } else {
+            echo "No funca";
+        }
+        $conexion->desconectar($conn);
+    }
 }
 ?>

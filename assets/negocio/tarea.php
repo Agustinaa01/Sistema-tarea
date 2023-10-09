@@ -7,15 +7,16 @@ class Tarea {
     private $responsable;
     private $estado; 
 
-    public function __contructor($nombre, $email, $usuario)
+    public function __construct($id, $titulo, $descripcion, $fecha_venc, $responsable, $estado)
     {
-        $this -> id = $id;
+        $this->id = $id;
         $this->titulo = $titulo;
         $this->descripcion = $descripcion;
-        $this ->fecha_venc = $fecha_venc;
-        $this -> responsable = $responsable;
-        $this -> estado = $estado; 
+        $this->fecha_venc = $fecha_venc;
+        $this->responsable = $responsable;
+        $this->estado = $estado;
     }
+    
     public function getId()
     {
         return $this->id;

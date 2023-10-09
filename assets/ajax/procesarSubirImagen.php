@@ -14,7 +14,7 @@ if (isset($_SESSION['id'])) {
 
         $nombreUsuario = $usuario->getUsuario();
 
-        $rutaDeDestino = __DIR__ . '/../assets/imgProfile/';
+        $rutaDeDestino = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'imgProfile' . DIRECTORY_SEPARATOR;
 
         if (!is_dir($rutaDeDestino)) {
             mkdir($rutaDeDestino, 0777, true);

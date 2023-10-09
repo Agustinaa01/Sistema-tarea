@@ -150,10 +150,10 @@ class CatalogoUsuarios {
     
         $hashedPassword = md5($password);
     
-        $query = "UPDATE usuarios SET nombre = ?, usuario = ?, email = ?, password = ?, imagen = ? WHERE id = ?";
+        $query = "UPDATE usuarios SET nombre = ?, usuario = ?, email = ?, password = ? WHERE id = ?";
         $stm = $conn->prepare($query);
         
-        $stm->bind_param("sssssi", $nombre, $usuario, $email, $hashedPassword, $imagen, $id);
+        $stm->bind_param("ssssi", $nombre, $usuario, $email, $hashedPassword, $id);
         
         $stm->execute();
     

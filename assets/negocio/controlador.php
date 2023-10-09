@@ -57,13 +57,18 @@ class Controlador {
 			$catUsu = new CatalogoUsuarios();
 			$usuario = $catUsu->datosUsuario($id);
 			return $usuario;
+		}		
+		function datosTarea(){
+			$catUsu = new CatalogoTarea();
+			$tarea = $catUsu->datosTarea();
+			return $tarea;
 		}
 		function subirImagen($id, $imagen){
 			$catUsu = new CatalogoUsuarios();
 			$usuario = $catUsu->subirImagen($id, $imagen);
 			return $usuario;
 		}
-
+		
 
 	}
 ?>
