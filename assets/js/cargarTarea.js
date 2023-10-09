@@ -11,7 +11,9 @@ function cargarTarea() {
                 document.getElementById('newDesc').textContent = data.desc;
                 document.getElementById('newResp').textContent = data.responsable;
                 document.getElementById('newFecha').textContent = data.fecha;
-                document.getElementById('usuarios-select').textContent = data.usuario;
+                            
+                var select = document.getElementById('responsable');
+                select.innerHTML = ''; 
             } else {
                 console.log("Error: " + data.message);
             }
