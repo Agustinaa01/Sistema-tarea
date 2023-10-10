@@ -60,8 +60,8 @@ class Controlador {
 		}		
 		function datosTarea(){
 			$catUsu = new CatalogoTarea();
-			$tarea = $catUsu->datosTarea();
-			return $tarea;
+			$tareas = $catUsu->datosTarea();
+			return $tareas;
 		}
 		function subirImagen($id, $imagen){
 			$catUsu = new CatalogoUsuarios();

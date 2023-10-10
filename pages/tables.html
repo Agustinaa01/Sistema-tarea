@@ -22,7 +22,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <!-- Nepcha is an easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA, and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -76,16 +76,16 @@
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
 
-      <div class="container-fluid py-1 px-3">
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group input-group-outline">
-              <label class="form-label">Buscar.</label>
-              <input type="text" class="form-control">
-            </div>
+    <div class="container-fluid py-1 px-3">
+      <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="input-group input-group-outline">
+            <label class="form-label">Buscar.</label>
+            <input type="text" class="form-control">
           </div>
         </div>
-      
+      </div>
+    </div>
     <!-- End Navbar -->
     <!-- Tabla Tarea -->
     <div class="container-fluid py-4">
@@ -119,34 +119,7 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td id="newTitle"></td>
-                      <td id="newDesc"></td>
-                      <td id="newResp"></td>
-                      <td id="newFecha"></td>
-                      <td class="text-center">
-                        <input type="checkbox" id="checkbox1">
-                      </td>
-                      <td class="text-center">
-                        <select id="responsable" class="text-secondary text-xs font-weight-bold">
-                         
-                      </select>
-                      
-                        <button type="button" class="text-secondary text-xs font-weight-bold" onclick="agregarUsuario()">Agregar</button>
-                        <details>
-                          <summary>Usuario agregado:</summary>
-                          <span id="usuarioAgregado"></span>
-                        </details>
-                      </td>
-                      <td class="text-center">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                          data-original-title="Editar tarea">
-                          Editar
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
+                  <tbody id="taskTableBody"></tbody>
                 </table>
               </div>
             </div>
@@ -154,28 +127,30 @@
         </div>
       </div>
     </div>
-        <!-- End Toggle Button -->
-      </div>
-      <hr class="horizontal dark my-1">
-      <div class="card-body pt-sm-3 pt-0">
-        <!-- Sidebar Backgrounds -->
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/cargarTarea.js"></script>
-  <script src="../assets/js/cargarUsuariosResponsables.js"></script>
+    <!-- End Toggle Button -->
+    </div>
+    <hr class="horizontal dark my-1">
+    <div class="card-body pt-sm-3 pt-0">
+      <!-- Sidebar Backgrounds -->
+      <!--   Core JS Files   -->
+      <script src="../assets/js/core/popper.min.js"></script>
+      <script src="../assets/js/core/bootstrap.min.js"></script>
+      <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+      <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+      <script src="../assets/js/cargarTarea.js"></script>
+      <script src="../assets/js/cargarUsuariosResponsables.js"></script>
 
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
+      <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+          var options = {
+            damping: '0.5'
+          }
+          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+      </script>
+    </div>
+  </main>
 </body>
 
 </html>
