@@ -1,3 +1,4 @@
+var usuarios = [];
 function cargarUsuariosResponsables() {
     $.ajax({
         url: '../assets/ajax/procesarObtenerResponsables.php',
