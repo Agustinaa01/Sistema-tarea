@@ -41,6 +41,7 @@ foreach ($tareas as $tarea) {
     $tabla .= '</select>';
     $tabla .= '<div class="usuarios-tarea"></div>'; // Agregar este div para mostrar los usuarios
     $tabla .= '<td><button type="button" class="btn-aceptar">Aceptar</button></td>';
+    $tabla .= '<td><button class="btn-editar">Editar</button></td>';    
     $tabla .= '</tr>';
 }
 

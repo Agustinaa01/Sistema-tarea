@@ -59,7 +59,6 @@ function cargarUsuariosTareas() {
                 var idTarea = usuarioTarea.id_tarea;
                 var idUsuario = usuarioTarea.id_usuario;
 
-                // Realiza una nueva solicitud AJAX para obtener el nombre del usuario
                 $.ajax({
                     url: '../assets/ajax/procesarObtenerNombreUsuario.php',
                     type: 'GET',

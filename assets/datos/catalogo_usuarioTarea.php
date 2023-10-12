@@ -58,6 +58,8 @@ class CatalogoUsuarioTarea {
 		$stm->execute();
 		$result = $stm->get_result();
 		
+		$nombresUsuarios = array(); // Declaración inicial
+		
 		while ($row = $result->fetch_assoc()) {
 			$nombresUsuarios[] = $row['nombre'];
 		}
@@ -65,7 +67,7 @@ class CatalogoUsuarioTarea {
 		$conexion->desconectar($conn);
 		
 		return $nombresUsuarios;
-	}
+	}	
 	
 	function actualizarTareaResponsable($id_tarea, $id_usuario) {
 		$conexion = new Conexion();
