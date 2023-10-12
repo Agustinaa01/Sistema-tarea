@@ -38,10 +38,9 @@ foreach ($tareas as $tarea) {
         $tabla .= '<option value="' . $usuario['id'] . '" ' . $selected . '>' . $usuario['nombre'] . '</option>';
     }
 
-    $tabla .= '<td><button type="button  onClick= "agregarEventoAceptar" class="btn-aceptar">Aceptar</button></td>';
     $tabla .= '</select>';
-    $tabla .= '</td>';
-    $tabla .= '<td><span class "edit-text">Editar</span></td>';
+    $tabla .= '<div class="usuarios-tarea"></div>'; // Agregar este div para mostrar los usuarios
+    $tabla .= '<td><button type="button" class="btn-aceptar">Aceptar</button></td>';
     $tabla .= '</tr>';
 }
 

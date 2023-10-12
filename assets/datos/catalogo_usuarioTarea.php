@@ -1,6 +1,7 @@
 <?php
 include_once("../datos/conexion.php");
 include_once ("../negocio/username.php");
+include_once ("../negocio/usuarioTarea.php");
 
 class CatalogoUsuarioTarea {	
 	function getUsuarioTareas()
@@ -27,28 +28,33 @@ class CatalogoUsuarioTarea {
 		return $usuario_tareas;
 	}
 	
-	function getUsuarioTarea($id_usuario)
+	function getUsuarioTarea()
 	{	
 		$conexion = new Conexion();
 		$conn = $conexion->conectar();
 		
-		$query = "SELECT * FROM usuario_tarea WHERE id_usuario=?;";   
+		$query = "SELECT * FROM usuario_tarea";   
 		$stm = $conn->prepare($query);
-		
-		$stm->bind_result($id_tarea,$id_usuario);
-        $stm->bind_param("i", $id_usuario);
+		// $stm->bind_param("i", $id_tarea);
 		$stm->execute();
-		$stm->fetch();
-		$usuario_tarea = new Usuario_Tarea ($id_tarea,$id_usuario);	
+		
+		$result = $stm->get_result();
+		
+		while ($row = $result->fetch_assoc()) {
+			$usuario_tareas[] = new Usuario_Tarea($row['id_tarea'], $row['id_usuario']);
+		}
+		
 		$conexion->desconectar($conn);
-		return $usuario_tarea;
-	}
+		return $usuario_tareas;
+	}	
 
 	function actualizarTareaResponsable($id_tarea, $id_usuario) {
 		$conexion = new Conexion();
 		$conn = $conexion->conectar();
 	
-		$query = "INSERT INTO usuario_tarea (id_usuario, id_tarea) VALUES (?, ?)";
+		$query = "INSERT INTO usuario_tarea (id_usuario, id_tarea) VALUES (?, ?)
+		ON DUPLICATE KEY UPDATE id_usuario = VALUES(id_usuario), id_tarea = VALUES(id_tarea);
+		";
 		$stm = $conn->prepare($query);
 		$stm->bind_param("ii", $id_usuario, $id_tarea);
 	

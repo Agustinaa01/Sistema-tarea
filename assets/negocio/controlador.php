@@ -74,9 +74,9 @@ class Controlador {
 			$tarea = $catUsu->actualizarTareaResponsable($id_tarea, $id_usuario);
 			return $tarea;
 		}
-		function getUsuarioTarea($id_usuario){
+		function getUsuarioTarea(){
 			$catUsu = new CatalogoUsuarioTarea();
-			$tarea = $catUsu->getUsuarioTarea($id_usuario);
+			$tarea = $catUsu->getUsuarioTarea();
 			return $tarea;
 		}
 	}
