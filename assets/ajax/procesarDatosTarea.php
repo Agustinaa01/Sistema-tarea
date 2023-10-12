@@ -38,8 +38,7 @@ foreach ($tareas as $tarea) {
         $tabla .= '<option value="' . $usuario['id'] . '" ' . $selected . '>' . $usuario['nombre'] . '</option>';
     }
 
-    // Agregar un botón "Aceptar" para actualizar el nombre del responsable
-    $tabla .= '<td><button type="button" class="btn-aceptar">Aceptar</button></td>';
+    $tabla .= '<td><button type="button  onClick= "agregarEventoAceptar" class="btn-aceptar">Aceptar</button></td>';
     $tabla .= '</select>';
     $tabla .= '</td>';
     $tabla .= '<td><span class "edit-text">Editar</span></td>';

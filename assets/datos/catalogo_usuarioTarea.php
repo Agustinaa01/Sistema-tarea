@@ -1,6 +1,6 @@
 <?php
 include_once("../datos/conexion.php");
-include_once "../negocio/usuario.php";
+include_once ("../negocio/username.php");
 
 class CatalogoUsuarioTarea {	
 	function getUsuarioTareas()
@@ -43,5 +43,21 @@ class CatalogoUsuarioTarea {
 		$conexion->desconectar($conn);
 		return $usuario_tarea;
 	}
+
+	function actualizarTareaResponsable($id_tarea, $id_usuario) {
+		$conexion = new Conexion();
+		$conn = $conexion->conectar();
+	
+		$query = "INSERT INTO usuario_tarea (id_usuario, id_tarea) VALUES (?, ?)";
+		$stm = $conn->prepare($query);
+		$stm->bind_param("ii", $id_usuario, $id_tarea);
+	
+		$result = $stm->execute();
+	
+		$conexion->desconectar($conn);
+	
+		return $result;
+	}
+
 }
 ?>

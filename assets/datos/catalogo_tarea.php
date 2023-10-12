@@ -86,6 +86,5 @@ function datosTarea()
     
     return $tareas;
 }
-
 }
 ?>

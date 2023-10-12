@@ -2,6 +2,7 @@
 
 include("../datos/catalogo_usuario.php");
 include("../datos/catalogo_tarea.php");
+include("../datos/catalogo_usuarioTarea.php");
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 class Controlador {	
@@ -67,8 +68,16 @@ class Controlador {
 			$catUsu = new CatalogoUsuarios();
 			$usuario = $catUsu->subirImagen($id, $imagen);
 			return $usuario;
+		}		
+		function actualizarTareaResponsable($id_tarea, $id_usuario){
+			$catUsu = new CatalogoUsuarioTarea();
+			$tarea = $catUsu->actualizarTareaResponsable($id_tarea, $id_usuario);
+			return $tarea;
 		}
-		
-
+		function getUsuarioTarea($id_usuario){
+			$catUsu = new CatalogoUsuarioTarea();
+			$tarea = $catUsu->getUsuarioTarea($id_usuario);
+			return $tarea;
+		}
 	}
 ?>
