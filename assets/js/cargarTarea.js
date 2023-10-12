@@ -59,10 +59,25 @@ function cargarUsuariosTareas() {
                 var idTarea = usuarioTarea.id_tarea;
                 var idUsuario = usuarioTarea.id_usuario;
 
-                var usuariosContainer = $("select[data-id='" + idTarea + "']").next(".usuarios-tarea");
-                var nuevoElemento = document.createElement('div');
-                nuevoElemento.innerText = idUsuario; 
-                usuariosContainer.append(nuevoElemento);
+                // Realiza una nueva solicitud AJAX para obtener el nombre del usuario
+                $.ajax({
+                    url: '../assets/ajax/procesarObtenerNombreUsuario.php',
+                    type: 'GET',
+                    data: { id_usuario: idUsuario },
+                    success: function (nombreUsuario) {
+                        var usuariosContainer = $("select[data-id='" + idTarea + "']").next(".usuarios-tarea");
+                        usuariosContainer.empty();
+
+                        nombreUsuario = nombreUsuario.replace(/["\[\]]/g, '');
+
+                        var nuevoElemento = document.createElement('div');
+                        nuevoElemento.innerText = nombreUsuario;
+                        usuariosContainer.append(nuevoElemento);
+                    },
+                    error: function (error) {
+                        console.error("Error al cargar los nombres de usuarios:", error);
+                    }
+                });
             });
         },
         error: function (error) {

@@ -39,6 +39,7 @@ class CatalogoUsuarioTarea {
 		$stm->execute();
 		
 		$result = $stm->get_result();
+
 		
 		while ($row = $result->fetch_assoc()) {
 			$usuario_tareas[] = new Usuario_Tarea($row['id_tarea'], $row['id_usuario']);
@@ -47,7 +48,25 @@ class CatalogoUsuarioTarea {
 		$conexion->desconectar($conn);
 		return $usuario_tareas;
 	}	
-
+	function obtenerNombreUsuario($id_usuario) {
+		$conexion = new Conexion();
+		$conn = $conexion->conectar();
+		
+		$query = "SELECT nombre FROM usuarios WHERE id IN (SELECT id_usuario FROM usuario_tarea WHERE id_usuario = ?)";
+		$stm = $conn->prepare($query);
+		$stm->bind_param("i", $id_usuario);
+		$stm->execute();
+		$result = $stm->get_result();
+		
+		while ($row = $result->fetch_assoc()) {
+			$nombresUsuarios[] = $row['nombre'];
+		}
+		
+		$conexion->desconectar($conn);
+		
+		return $nombresUsuarios;
+	}
+	
 	function actualizarTareaResponsable($id_tarea, $id_usuario) {
 		$conexion = new Conexion();
 		$conn = $conexion->conectar();

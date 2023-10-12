@@ -79,5 +79,10 @@ class Controlador {
 			$tarea = $catUsu->getUsuarioTarea();
 			return $tarea;
 		}
+		function obtenerNombreUsuario($id_usuario) {
+			$catUsuario = new CatalogoUsuarioTarea(); 
+			$usuario = $catUsuario->obtenerNombreUsuario($id_usuario);
+			return $usuario;
+		}
 	}
 ?>
