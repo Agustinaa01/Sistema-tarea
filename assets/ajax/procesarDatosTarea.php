@@ -32,7 +32,6 @@ foreach ($tareas as $tarea) {
     $tabla .= '<td><select data-id="' . $tarea['id'] . '">';
     $tabla .= '<option value="">Seleccionar Integrante</option>';
 
-    // Iterar sobre los usuarios responsables y generar las opciones
     foreach ($usuariosResponsables as $usuario) {
         $selected = ($tarea['responsable'] == $usuario['nombre']) ? 'selected' : '';
         $tabla .= '<option value="' . $usuario['id'] . '" ' . $selected . '>' . $usuario['nombre'] . '</option>';
@@ -47,6 +46,5 @@ foreach ($tareas as $tarea) {
 
 $tabla .= '</tbody>';
 $tabla .= '</table>';
-
 echo $tabla;
 ?>

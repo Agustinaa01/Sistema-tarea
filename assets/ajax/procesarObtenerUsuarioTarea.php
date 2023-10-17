@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
-    // $id_tarea = $_GET['id_tarea'];
+
 
     $controlador = new Controlador();
     $usuarioTareas = $controlador->getUsuarioTarea();

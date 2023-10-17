@@ -506,6 +506,19 @@ legend+* {
 ::-webkit-color-swatch-wrapper {
   padding: 0;
 }
+#miToast {
+  position: fixed;
+  top: 10px; /* Ajusta la distancia desde la parte superior según tus necesidades */
+  right: 10px; /* Ajusta la distancia desde la derecha según tus necesidades */
+  z-index: 1051; /* Asegura que esté por encima de otros elementos fijos */
+  background-color: #fff; /* Fondo blanco */
+  color: #000; /* Texto negro */
+}
+
+#miToast .toast-header {
+  background-color: #71a2c3; /* Fondo azul para el encabezado */
+  color: #fff; /* Texto blanco para el encabezado */
+}
 
 /* ::file-selector-button {
   font: inherit;

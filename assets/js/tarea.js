@@ -4,21 +4,16 @@ function tarea() {
     var vencimiento = document.getElementById("date").value;
     var select = document.getElementById("responsable");
     var responsable = select.options[select.selectedIndex].value;
-    
+
     var fechaActual = new Date().toISOString().split('T')[0];
-    var tareaMensaje = document.getElementById('tarea-mensaje');
 
     if (vencimiento < fechaActual) {
-        tareaMensaje.innerHTML = ("La fecha de vencimiento debe ser a partir de hoy.");
-        tareaMensaje.classList.add('mostrar');
-        ocultarMensaje(tareaMensaje);
+        mostrarNotificacion('La fecha de vencimiento debe ser a partir de hoy.');
         return;
     }
 
     if (titulo === "" || descripcion === "" || vencimiento === "" || responsable === "") {
-        tareaMensaje.innerHTML = 'Por favor, ingresa los datos';
-        tareaMensaje.classList.add('mostrar');
-        ocultarMensaje(tareaMensaje);
+        mostrarNotificacion('Por favor, ingresa los datos');
     } else {
         var formData = {
             titulo: titulo,
@@ -31,33 +26,40 @@ function tarea() {
             url: '../assets/ajax/procesarTarea.php',
             type: 'POST',
             data: JSON.stringify(formData),
-            contentType: false,
-            processData: false,
+            contentType: 'application/json',
             success: function (response) {
                 var jsonResponse = JSON.parse(response);
 
                 if (jsonResponse.success) {
-                    tareaMensaje.innerHTML = '¡Tarea creada!';
-        
+                    mostrarNotificacion('¡Tarea creada!');
+                    
+                    // Limpiar los campos de entrada
                     document.getElementById("title").value = "";
                     document.getElementById("description").value = "";
                     document.getElementById("date").value = "";
                     select.selectedIndex = 0;
-                    
-                    tareaMensaje.classList.add('mostrar');
-                    ocultarMensaje(tareaMensaje);
                 } else {
-                    tareaMensaje.innerHTML = 'La tarea no se pudo crear';
-                    tareaMensaje.classList.add('mostrar');
-                    ocultarMensaje(tareaMensaje);
+                    mostrarNotificacion('La tarea no se pudo crear');
                 }
             }
         });
     }
 }
 
+function mostrarNotificacion(mensaje) {
+    var miToast = new bootstrap.Toast(document.getElementById('miToast'));
+    var toastBody = document.querySelector('.toast-body');
+    toastBody.innerHTML = mensaje;
+    miToast.show();
+
+    setTimeout(function() {
+        miToast.hide();
+    }, 2700);
+}
+
+
 function ocultarMensaje(mensaje) {
     setTimeout(function() {
-        mensaje.classList.remove('mostrar'); // Ocultar el mensaje después de 5 segundos (puedes ajustar el tiempo)
-    }, 2500);
+        mensaje.classList.remove('mostrar'); 
+    }, 3000);
 }

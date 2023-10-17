@@ -121,7 +121,6 @@
     <div class="col-xl-8 offset-xl-2 mb-4">
       <div class="custom-card">
         <div class="custom-card-body">
-          <div id="tarea-mensaje"></div>
           <h3 class="custom-title">Crear Tarea</h3>
           <form>
             <div class="custom-form-group">
@@ -152,8 +151,24 @@
           </form>
         </div>
       </div>
+      <!-- Bootstrap Toast para notificación -->
+      <div class="toast" id="miToast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Notificación</strong>
+            <small>hace un momento</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+        <div class="toast-body">
+            Este es el contenido de la notificación.
+        </div>
     </div>
+    
     <!--   Core JS Files   -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>

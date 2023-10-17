@@ -57,6 +57,7 @@ class CatalogoTarea {
         
         return $result;
     }	
+	
 	function datosTarea()
 	{
 		$conexion = new Conexion();

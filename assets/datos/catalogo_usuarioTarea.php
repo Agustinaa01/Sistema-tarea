@@ -58,7 +58,7 @@ class CatalogoUsuarioTarea {
 		$stm->execute();
 		$result = $stm->get_result();
 		
-		$nombresUsuarios = array(); // Declaración inicial
+		$nombresUsuarios = array();
 		
 		while ($row = $result->fetch_assoc()) {
 			$nombresUsuarios[] = $row['nombre'];

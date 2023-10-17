@@ -65,13 +65,16 @@ function cargarUsuariosTareas() {
                     data: { id_usuario: idUsuario },
                     success: function (nombreUsuario) {
                         var usuariosContainer = $("select[data-id='" + idTarea + "']").next(".usuarios-tarea");
-                        usuariosContainer.empty();
 
                         nombreUsuario = nombreUsuario.replace(/["\[\]]/g, '');
+                        
+                        if (!usuariosContainer.text().includes(nombreUsuario)) {
+                            if (usuariosContainer.text() !== "") {
+                                usuariosContainer.append("<br/> ");
+                            }
 
-                        var nuevoElemento = document.createElement('div');
-                        nuevoElemento.innerText = nombreUsuario;
-                        usuariosContainer.append(nuevoElemento);
+                            usuariosContainer.append(nombreUsuario);
+                        }
                     },
                     error: function (error) {
                         console.error("Error al cargar los nombres de usuarios:", error);
@@ -84,4 +87,3 @@ function cargarUsuariosTareas() {
         }
     });
 }
-
