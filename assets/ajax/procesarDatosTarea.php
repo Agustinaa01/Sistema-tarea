@@ -28,7 +28,7 @@ foreach ($tareas as $tarea) {
     $tabla .= '<td>' . $tarea['descripcion'] . '</td>';
     $tabla .= '<td>' . $tarea['responsable'] . '</td>';
     $tabla .= '<td>' . $tarea['fecha_venc'] . '</td>';
-    $tabla .= '<td><input type="checkbox"></td>';
+    $tabla .= '<td><input type="checkbox" data-tarea-id="' . $tarea['id'] . '"></td>';
     $tabla .= '<td><select data-id="' . $tarea['id'] . '">';
     $tabla .= '<option value="">Seleccionar Integrante</option>';
 

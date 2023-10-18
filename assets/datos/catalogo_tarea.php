@@ -90,5 +90,27 @@ function datosTarea()
     
     return $tareas;
 }
+
+function actualizarEstadoTarea($tarea_id)
+{
+    $conexion = new Conexion();
+    $conn = $conexion->conectar();
+
+    $query = "UPDATE tareas
+	SET estado = 'Completado'
+	WHERE id = ?;";
+    $stm = $conn->prepare($query);
+
+    $stm->bind_param("i",$tarea_id);
+
+    $tarea = $stm->execute();
+
+    $stm->close();
+    $conexion->desconectar($conn);
+
+    return $tarea;
 }
+
+}
+
 ?>

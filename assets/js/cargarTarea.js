@@ -89,3 +89,28 @@ function cargarUsuariosTareas() {
         }
     });
 }
+function cambiarEstadoTerminado(tareaId) {
+    $.ajax({
+        url: '../assets/ajax/procesarActualizarEstadoTarea.php', 
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ tarea_id: tareaId }),
+        dataType: 'json',
+        success: function(data) {
+            if (data.success) {
+                console.log('Estado actualizado correctamente.');
+            } else {
+                console.error('Error al actualizar el estado:', data.message);
+            }
+        },
+        error: function(error) {
+            console.error('Error en la solicitud AJAX:', error);
+        }
+    });
+}
+
+$(document).on('change', 'input[type="checkbox"]', function() {
+    var $checkbox = $(this);
+    var tareaId = $checkbox.data('tarea-id');
+    cambiarEstadoTerminado(tareaId);
+});

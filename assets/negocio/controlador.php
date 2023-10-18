@@ -84,5 +84,10 @@ class Controlador {
 			$usuario = $catUsuario->obtenerNombreUsuario($id_usuario);
 			return $usuario;
 		}
+		function actualizarEstadoTarea($tarea_id) {
+			$catTarea = new CatalogoTarea(); 
+			$tarea = $catTarea-> actualizarEstadoTarea($tarea_id);
+			return $tarea;
+		}
 	}
 ?>
