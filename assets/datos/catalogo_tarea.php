@@ -67,7 +67,9 @@ function datosTarea()
     
     $query = "SELECT t.id, t.titulo, t.descripcion, t.fecha_venc, t.responsable, u.nombre AS nombre_responsable
     FROM tareas t
-    LEFT JOIN usuarios u ON t.responsable = u.id";  
+    LEFT JOIN usuarios u ON t.responsable = u.id
+    WHERE t.estado IS NULL";
+ 
     $stm = $conn->prepare($query);
     
     $stm->execute();
@@ -90,6 +92,43 @@ function datosTarea()
     
     return $tareas;
 }
+function datosTareaComplete()
+{
+    $conexion = new Conexion();
+    $conn = $conexion->conectar();
+    
+    $query = "SELECT t.id, t.titulo, t.descripcion, t.fecha_venc, u.nombre AS nombre_responsable, 
+    (SELECT GROUP_CONCAT(iu.nombre) FROM usuario_tarea ut
+     LEFT JOIN usuarios iu ON ut.id_usuario = iu.id
+     WHERE ut.id_tarea = t.id) AS integrantes
+    FROM tareas t
+    LEFT JOIN usuarios u ON t.responsable = u.id
+    WHERE t.estado IS NOT NULL";
+
+    $stm = $conn->prepare($query);
+    
+    $stm->execute();
+    $result = $stm->get_result();
+    
+    $tareas = array();
+    
+    while ($row = $result->fetch_assoc()) {
+        $tarea = array(
+            'id' => $row['id'],
+            'titulo' => $row['titulo'],
+            'descripcion' => $row['descripcion'],
+            'fecha_venc' => $row['fecha_venc'],
+            'responsable' => $row['nombre_responsable'],
+            'integrantes' => $row['integrantes']
+        );        
+        $tareas[] = $tarea;
+    }
+    
+    $conexion->desconectar($conn);
+    
+    return $tareas;
+}
+
 
 function actualizarEstadoTarea($tarea_id)
 {

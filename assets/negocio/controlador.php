@@ -64,6 +64,11 @@ class Controlador {
 			$tareas = $catUsu->datosTarea();
 			return $tareas;
 		}
+		function datosTareaComplete(){
+			$catUsu = new CatalogoTarea();
+			$tareas = $catUsu->datosTareaComplete();
+			return $tareas;
+		}
 		function subirImagen($id, $imagen){
 			$catUsu = new CatalogoUsuarios();
 			$usuario = $catUsu->subirImagen($id, $imagen);
@@ -89,5 +94,6 @@ class Controlador {
 			$tarea = $catTarea-> actualizarEstadoTarea($tarea_id);
 			return $tarea;
 		}
+		
 	}
 ?>

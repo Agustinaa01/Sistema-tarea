@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     cargarTarea();
+    cargarTareaCompleta();
     cargarUsuariosTareas();
 });
 
@@ -11,6 +12,21 @@ function cargarTarea() {
         success: function (data) {
             document.getElementById("taskTableBody").innerHTML = data;
             agregarEventoAceptar();
+            cambiarEstadoTerminado();
+        },
+        error: function (error) {
+            console.error("Error al cargar la tabla de tareas:", error);
+        }
+    });
+}
+
+function cargarTareaCompleta() {
+    $.ajax({
+        url: '../assets/ajax/procesarDatosTareaCompleta.php',
+        type: 'GET',
+        dataType: 'html',
+        success: function (data) {
+            document.getElementById("taskTableBody-complete").innerHTML = data;
         },
         error: function (error) {
             console.error("Error al cargar la tabla de tareas:", error);
@@ -89,28 +105,33 @@ function cargarUsuariosTareas() {
         }
     });
 }
-function cambiarEstadoTerminado(tareaId) {
-    $.ajax({
-        url: '../assets/ajax/procesarActualizarEstadoTarea.php', 
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ tarea_id: tareaId }),
-        dataType: 'json',
-        success: function(data) {
-            if (data.success) {
-                console.log('Estado actualizado correctamente.');
-            } else {
-                console.error('Error al actualizar el estado:', data.message);
-            }
-        },
-        error: function(error) {
-            console.error('Error en la solicitud AJAX:', error);
+
+function cambiarEstadoTerminado() {
+    $(document).on('change', 'input[type="checkbox"]', function() {
+        var $checkbox = $(this);
+        var tareaId = $checkbox.data('tarea-id');
+
+        var estaSeguro = confirm("¿Estás seguro de que deseas marcar esta tarea como completada y eliminarla?");
+
+        if (estaSeguro) {
+            $.ajax({
+                url: '../assets/ajax/procesarActualizarEstadoTarea.php', 
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({ tarea_id: tareaId }), // Enviar el objeto JSON
+                success: function(data) {
+                    if (data.success) {
+                        console.log('Estado actualizado correctamente.');
+                        $(`input[type="checkbox"][data-tarea-id="${tareaId}"]`).closest('tr').remove();
+                    } else {
+                        console.error('Error al actualizar el estado:', data.message);
+                    }
+                },
+                error: function(error) {
+                    console.error('Error en la solicitud AJAX:', error);
+                }
+            });
         }
     });
 }
 
-$(document).on('change', 'input[type="checkbox"]', function() {
-    var $checkbox = $(this);
-    var tareaId = $checkbox.data('tarea-id');
-    cambiarEstadoTerminado(tareaId);
-});
