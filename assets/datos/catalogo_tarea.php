@@ -43,6 +43,7 @@ class CatalogoTarea {
 		$conexion->desconectar($conn);
 		return $tarea;
 	}
+	
     function crearTarea($titulo, $descripcion, $vencimiento, $responsable)
     {
         $conexion = new Conexion();
@@ -58,34 +59,36 @@ class CatalogoTarea {
         return $result;
     }	
 	
-	function datosTarea()
-	{
-		$conexion = new Conexion();
-		$conn = $conexion->conectar();
-		
-		$query = "SELECT * FROM tareas";   
-		$stm = $conn->prepare($query);
-		
-		$stm->execute();
-		$result = $stm->get_result();
-		
-		$tareas = array();
-		
-		while ($row = $result->fetch_assoc()) {
-			$tarea = array(
-				'id' => $row['id'],
-				'titulo' => $row['titulo'],
-				'descripcion' => $row['descripcion'],
-				'fecha_venc' => $row['fecha_venc'],
-				'responsable' => $row['responsable'],
-				'estado' => $row['estado']
-			);        
-			$tareas[] = $tarea;
-		}
-		
-		$conexion->desconectar($conn);
-		
-		return $tareas;
-	}
+
+function datosTarea()
+{
+    $conexion = new Conexion();
+    $conn = $conexion->conectar();
+    
+    $query = "SELECT t.id, t.titulo, t.descripcion, t.fecha_venc, t.responsable, u.nombre AS nombre_responsable
+    FROM tareas t
+    LEFT JOIN usuarios u ON t.responsable = u.id";  
+    $stm = $conn->prepare($query);
+    
+    $stm->execute();
+    $result = $stm->get_result();
+    
+    $tareas = array();
+    
+    while ($row = $result->fetch_assoc()) {
+        $tarea = array(
+            'id' => $row['id'],
+            'titulo' => $row['titulo'],
+            'descripcion' => $row['descripcion'],
+            'fecha_venc' => $row['fecha_venc'],
+            'responsable' => $row['nombre_responsable']
+        );        
+        $tareas[] = $tarea;
+    }
+    
+    $conexion->desconectar($conn);
+    
+    return $tareas;
+}
 }
 ?>

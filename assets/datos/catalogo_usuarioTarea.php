@@ -39,7 +39,7 @@ class CatalogoUsuarioTarea {
 		$stm->execute();
 		
 		$result = $stm->get_result();
-
+		$usuario_tareas = array();
 		
 		while ($row = $result->fetch_assoc()) {
 			$usuario_tareas[] = new Usuario_Tarea($row['id_tarea'], $row['id_usuario']);

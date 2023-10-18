@@ -20,8 +20,10 @@ function cargarTarea() {
 
 function agregarEventoAceptar() {
     $(".btn-aceptar").click(function () {
+        //encuentran el menú desplegable y obtienen el texto de la opción que el usuario ha seleccionado.
         var selectedOption = $(this).closest("tr").find("select option:selected");
         var nuevoResponsable = selectedOption.text();
+        //selecciona el id de tarea y usuario
         var id_tarea = selectedOption.closest("select").data("id");
         var id_usuario = selectedOption.val();
 
@@ -39,7 +41,7 @@ function agregarEventoAceptar() {
                 console.error("Error al actualizar la tarea:", error);
             }
         });
-
+        //muestra lo seleccionado abajo del dropdown
         var nuevoElemento = document.createElement('div');
         nuevoElemento.innerText = nuevoResponsable;
 
@@ -69,10 +71,10 @@ function cargarUsuariosTareas() {
                         nombreUsuario = nombreUsuario.replace(/["\[\]]/g, '');
                         
                         if (!usuariosContainer.text().includes(nombreUsuario)) {
+                        
                             if (usuariosContainer.text() !== "") {
-                                usuariosContainer.append("<br/> ");
+                                usuariosContainer.append(", ");
                             }
-
                             usuariosContainer.append(nombreUsuario);
                         }
                     },
