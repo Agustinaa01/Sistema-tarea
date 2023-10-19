@@ -16,8 +16,9 @@ $tabla .= '<th>Responsable</th>';
 $tabla .= '<th>Fecha de Vencimiento</th>';
 $tabla .= '<th>Terminado</th>';
 $tabla .= '<th>Integrantes</th>';
-$tabla .= '<td>&nbsp;</td>';
+$tabla .= '<th>&nbsp;</th>';
 $tabla .= '<th>Editar</th>';
+$tabla .= '<th>Eliminar</th>';
 $tabla .= '</tr>';
 $tabla .= '</thead>';
 $tabla .= '<tbody id="taskTableBody">';
@@ -39,8 +40,9 @@ foreach ($tareas as $tarea) {
 
     $tabla .= '</select>';
     $tabla .= '<div class="usuarios-tarea"></div>'; 
-    $tabla .= '<td><button type="button" class="btn-aceptar">Aceptar</button></td>';
+    $tabla .= '<td><button type="button" class="btn-agregar">Agregar</button></td>';
     $tabla .= '<td><button class="btn-editar">Editar</button></td>';    
+    $tabla .= '<td><button class="btn-eliminar" data-tarea-id="' . $tarea['id'] . '">Eliminar</button></td>';
     $tabla .= '</tr>';
 }
 

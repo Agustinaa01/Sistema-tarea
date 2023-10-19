@@ -15,7 +15,7 @@ $tabla .= '<th>Descripción</th>';
 $tabla .= '<th>Responsable</th>';
 $tabla .= '<th>Fecha de Vencimiento</th>';
 $tabla .= '<th>Integrantes</th>';
-$tabla .= '<td>&nbsp;</td>';
+$tabla .= '<th>Eliminar</th>';
 $tabla .= '</tr>';
 $tabla .= '</thead>';
 $tabla .= '<tbody id="taskTableBody-complete">';
@@ -27,6 +27,7 @@ foreach ($tareas as $tarea) {
     $tabla .= '<td>' . $tarea['responsable'] . '</td>';
     $tabla .= '<td>' . $tarea['fecha_venc'] . '</td>';
     $tabla .= '<td>' . $tarea['integrantes'] . '</td>';
+    $tabla .= '<td><button type="button" class="btn-eliminar" data-tarea-id="' . $tarea['id'] . '">Eliminar</button></td>';
 }
 
 $tabla .= '</tbody>';

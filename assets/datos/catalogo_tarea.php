@@ -68,7 +68,7 @@ function datosTarea()
     $query = "SELECT t.id, t.titulo, t.descripcion, t.fecha_venc, t.responsable, u.nombre AS nombre_responsable
     FROM tareas t
     LEFT JOIN usuarios u ON t.responsable = u.id
-    WHERE t.estado IS NULL";
+    WHERE t.estado IS NULL AND t.eliminado = 0";
  
     $stm = $conn->prepare($query);
     
@@ -103,7 +103,7 @@ function datosTareaComplete()
      WHERE ut.id_tarea = t.id) AS integrantes
     FROM tareas t
     LEFT JOIN usuarios u ON t.responsable = u.id
-    WHERE t.estado IS NOT NULL";
+    WHERE t.estado IS NOT NULL AND t.eliminado = 0";
 
     $stm = $conn->prepare($query);
     
@@ -149,7 +149,25 @@ function actualizarEstadoTarea($tarea_id)
 
     return $tarea;
 }
+function bajaLogica($id_tarea)
+{
+    $conexion = new Conexion();
+    $conn = $conexion->conectar();
 
+    $query = "UPDATE tareas
+	SET eliminado = 1
+	WHERE id = ?;";
+    $stm = $conn->prepare($query);
+
+    $stm->bind_param("i", $id_tarea);
+
+    $tarea = $stm->execute();
+
+    $stm->close();
+    $conexion->desconectar($conn);
+
+    return $tarea;
+}
 }
 
 ?>

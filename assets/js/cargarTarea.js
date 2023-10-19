@@ -13,6 +13,7 @@ function cargarTarea() {
             document.getElementById("taskTableBody").innerHTML = data;
             agregarEventoAceptar();
             cambiarEstadoTerminado();
+            bajaLogica();
         },
         error: function (error) {
             console.error("Error al cargar la tabla de tareas:", error);
@@ -27,6 +28,7 @@ function cargarTareaCompleta() {
         dataType: 'html',
         success: function (data) {
             document.getElementById("taskTableBody-complete").innerHTML = data;
+            bajaLogica();
         },
         error: function (error) {
             console.error("Error al cargar la tabla de tareas:", error);
@@ -35,7 +37,7 @@ function cargarTareaCompleta() {
 }
 
 function agregarEventoAceptar() {
-    $(".btn-aceptar").click(function () {
+    $(".btn-agregar").click(function () {
         //encuentran el menú desplegable y obtienen el texto de la opción que el usuario ha seleccionado.
         var selectedOption = $(this).closest("tr").find("select option:selected");
         var nuevoResponsable = selectedOption.text();
@@ -89,7 +91,7 @@ function cargarUsuariosTareas() {
                         if (!usuariosContainer.text().includes(nombreUsuario)) {
                         
                             if (usuariosContainer.text() !== "") {
-                                usuariosContainer.append(", ");
+                                usuariosContainer.append("<br/>");
                             }
                             usuariosContainer.append(nombreUsuario);
                         }
@@ -118,7 +120,7 @@ function cambiarEstadoTerminado() {
                 url: '../assets/ajax/procesarActualizarEstadoTarea.php', 
                 type: 'POST',
                 dataType: 'json',
-                data: JSON.stringify({ tarea_id: tareaId }), // Enviar el objeto JSON
+                data: JSON.stringify({ tarea_id: tareaId }),
                 success: function(data) {
                     if (data.success) {
                         console.log('Estado actualizado correctamente.');
@@ -135,3 +137,29 @@ function cambiarEstadoTerminado() {
     });
 }
 
+function bajaLogica() {
+    $(".btn-eliminar").click(function () {      
+        console.log("entro")
+        var id_tarea = $(this).data("tarea-id");
+        var filaTarea = $(this).closest("tr");
+
+        var confirmar = confirm("¿Estás seguro de que deseas eliminar esta tarea?");
+
+        if (confirmar) {
+            $.ajax({
+                url: '../assets/ajax/procesarBajaLogica.php',
+                type: 'POST',
+                data: {
+                    id_tarea: id_tarea
+                },
+                success: function (response) {
+                    console.log("Tarea eliminada correctamente.", response);
+                    filaTarea.remove();
+                },
+                error: function (error) {
+                    console.error("Error al eliminar la tarea:", error);
+                }
+            });
+        }
+    });
+}

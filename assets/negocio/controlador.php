@@ -94,6 +94,10 @@ class Controlador {
 			$tarea = $catTarea-> actualizarEstadoTarea($tarea_id);
 			return $tarea;
 		}
-		
+		function bajaLogica($id_tarea) {
+			$catTarea = new CatalogoTarea(); 
+			$tarea = $catTarea-> bajaLogica($id_tarea);
+			return $tarea;
+		}
 	}
 ?>
