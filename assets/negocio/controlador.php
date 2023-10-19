@@ -99,5 +99,10 @@ class Controlador {
 			$tarea = $catTarea-> bajaLogica($id_tarea);
 			return $tarea;
 		}
+		function obtenerDatosTareaPorID($idTarea) {
+			$catTarea = new CatalogoTarea(); 
+			$tarea = $catTarea-> obtenerDatosTareaPorID($idTarea);
+			return $tarea;
+		}
 	}
 ?>

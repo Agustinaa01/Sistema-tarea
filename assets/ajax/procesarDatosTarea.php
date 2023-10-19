@@ -41,7 +41,7 @@ foreach ($tareas as $tarea) {
     $tabla .= '</select>';
     $tabla .= '<div class="usuarios-tarea"></div>'; 
     $tabla .= '<td><button type="button" class="btn-agregar">Agregar</button></td>';
-    $tabla .= '<td><button class="btn-editar">Editar</button></td>';    
+    $tabla .= '<td><button class="btn-editar" data-tarea-id="' . $tarea['id'] . '">Editar</button></td>';
     $tabla .= '<td><button class="btn-eliminar" data-tarea-id="' . $tarea['id'] . '">Eliminar</button></td>';
     $tabla .= '</tr>';
 }

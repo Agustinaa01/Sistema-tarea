@@ -14,6 +14,7 @@ function cargarTarea() {
             agregarEventoAceptar();
             cambiarEstadoTerminado();
             bajaLogica();
+            editarTarea()
         },
         error: function (error) {
             console.error("Error al cargar la tabla de tareas:", error);
@@ -163,3 +164,29 @@ function bajaLogica() {
         }
     });
 }
+
+function editarTarea() {
+    $(document).on("click", ".btn-editar", function () {
+        var idTarea = $(this).data("tarea-id");
+        console.log(idTarea)
+       $.ajax({
+            url: '../assets/ajax/procesarDatosTareaID.php?id=' + idTarea,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                $("#titulo").val(data.titulo);
+                $("#descripcion").val(data.descripcion);
+                $("#responsable").val(data.responsable);
+                $("#fecha_venc").val(data.fecha_venc);
+
+                // Mostrar el modal de edición
+                $("#editarTareaModal").modal("show");
+            },
+            error: function (error) {
+                console.error("Error al obtener los datos de la tarea:", error);
+            }
+        });
+    });
+}
+
