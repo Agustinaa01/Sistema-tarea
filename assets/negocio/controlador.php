@@ -104,5 +104,11 @@ class Controlador {
 			$tarea = $catTarea-> obtenerDatosTareaPorID($idTarea);
 			return $tarea;
 		}
+		function datosEditados($idTarea, $titulo, $descripcion, $responsable, $fecha_venc) {
+			$catTarea = new CatalogoTarea(); 
+			$tarea = $catTarea-> datosEditados($idTarea, $titulo, $descripcion, $responsable, $fecha_venc);
+			return $tarea;
+		}
+
 	}
 ?>

@@ -171,6 +171,22 @@ function bajaLogica($id_tarea)
 
     return $tarea;
 }
+function datosEditados($idTarea, $titulo, $descripcion, $responsable, $fecha_venc)
+{
+    $conexion = new Conexion();
+    $conn = $conexion->conectar();
+
+    $query = "UPDATE tareas SET titulo = ?, descripcion = ?, responsable = ?, fecha_venc = ? WHERE id = ?";
+    $stm = $conn->prepare($query);
+    
+    $stm->bind_param("ssssi", $titulo , $descripcion, $responsable, $fecha_venc, $idTarea);
+    
+    $tarea = $stm->execute();
+
+    $stm->close();
+    $conexion->desconectar($conn);
+    return $tarea;
+} 
 }
 
 ?>

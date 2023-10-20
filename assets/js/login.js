@@ -16,7 +16,8 @@ function login() {
         contentType: false,
         processData: false,
         success: function (response) {
-            loginMensaje.innerHTML = '¡Inicio de Sesión exitoso!';
+            console.log(response);
+            loginMensaje.innerHTML = '¡Bienvenido!';
             setTimeout(function () {
                 window.location.href = 'profile.html';
             }, 2000);

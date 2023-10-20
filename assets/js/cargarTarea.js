@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cargarTarea();
     cargarTareaCompleta();
     cargarUsuariosTareas();
+    bajaLogica();
 });
 
 function cargarTarea() {
@@ -13,8 +14,7 @@ function cargarTarea() {
             document.getElementById("taskTableBody").innerHTML = data;
             agregarEventoAceptar();
             cambiarEstadoTerminado();
-            bajaLogica();
-            editarTarea()
+            editarTarea();
         },
         error: function (error) {
             console.error("Error al cargar la tabla de tareas:", error);
@@ -29,7 +29,6 @@ function cargarTareaCompleta() {
         dataType: 'html',
         success: function (data) {
             document.getElementById("taskTableBody-complete").innerHTML = data;
-            bajaLogica();
         },
         error: function (error) {
             console.error("Error al cargar la tabla de tareas:", error);
@@ -54,7 +53,7 @@ function agregarEventoAceptar() {
                 id_usuario: id_usuario
             },
             success: function (response) {
-                console.log("Tarea actualizada en la base de datos.");
+                mostrarNotificacion("¡Integrantes agregados correctamente!")
             },
             error: function (error) {
                 console.error("Error al actualizar la tarea:", error);
@@ -124,8 +123,11 @@ function cambiarEstadoTerminado() {
                 data: JSON.stringify({ tarea_id: tareaId }),
                 success: function(data) {
                     if (data.success) {
-                        console.log('Estado actualizado correctamente.');
-                        $(`input[type="checkbox"][data-tarea-id="${tareaId}"]`).closest('tr').remove();
+                        mostrarNotificacion("¡Tarea terminada!");
+                        setTimeout(function() {
+                            // ocultarNotificacion();
+                            $(`input[type="checkbox"][data-tarea-id="${tareaId}"]`).closest('tr').remove();
+                        }, 1000);
                     } else {
                         console.error('Error al actualizar el estado:', data.message);
                     }
@@ -154,27 +156,30 @@ function bajaLogica() {
                     id_tarea: id_tarea
                 },
                 success: function (response) {
-                    console.log("Tarea eliminada correctamente.", response);
+                    console.log("Éxito en la eliminación");
                     filaTarea.remove();
+                    mostrarNotificacion("¡Tarea eliminada correctamente!")
                 },
                 error: function (error) {
                     console.error("Error al eliminar la tarea:", error);
+                    mostrarNotificacion("¡La tarea no se pudo eliminar!")
                 }
             });
         }
     });
 }
 
+
 function editarTarea() {
     $(document).on("click", ".btn-editar", function () {
         var idTarea = $(this).data("tarea-id");
-        console.log(idTarea)
-       $.ajax({
+        console.log(idTarea);
+        $.ajax({
             url: '../assets/ajax/procesarDatosTareaID.php?id=' + idTarea,
             type: "GET",
             dataType: "json",
             success: function (data) {
-                console.log(data)
+                console.log(data);
                 $("#titulo").val(data.titulo);
                 $("#descripcion").val(data.descripcion);
                 $("#responsable").val(data.responsable);
@@ -182,11 +187,70 @@ function editarTarea() {
 
                 // Mostrar el modal de edición
                 $("#editarTareaModal").modal("show");
+
+                // Agregar el idTarea al botón "Guardar Cambios"
+                $("#guardarCambios").data("tarea-id", idTarea);
             },
             error: function (error) {
                 console.error("Error al obtener los datos de la tarea:", error);
             }
         });
     });
+
+    $("#guardarCambios").click(function () {
+        var idTarea = $(this).data("tarea-id");
+        datosEditados(idTarea);
+    });
 }
 
+function datosEditados(idTarea) {
+    var titulo = document.getElementById('titulo').value;
+    var descripcion = document.getElementById('descripcion').value;
+    var responsable = document.getElementById('responsable').value;
+    var fecha_venc = document.getElementById('fecha_venc').value;
+
+    var formData = {
+        idTarea: idTarea,
+        titulo: titulo,
+        descripcion: descripcion,
+        responsable: responsable,
+        fecha_venc: fecha_venc
+    };
+
+    $.ajax({
+        url: "../assets/ajax/procesarDatosEditados.php",
+        type: "POST",
+        data: JSON.stringify(formData),
+        contentType: "application/json; charset=utf-8",
+        success: function(data) {
+            console.log(data);
+
+            console.log("Cerrando el modal");
+            $("#editarTareaModal").modal("hide");
+            mostrarNotificacion("¡Tarea editada correctamente!");
+            cargarTarea();
+            cargarUsuariosTareas();
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+            mostrarNotificacion("¡La tarea no se pudo edita!")
+        }
+    });
+}
+function mostrarNotificacion(mensaje) {
+    var miToast = new bootstrap.Toast(document.getElementById('miToast'));
+    var toastBody = document.querySelector('.toast-body');
+    toastBody.innerHTML = mensaje;
+    miToast.show();
+
+    setTimeout(function() {
+        miToast.hide();
+    }, 2700);
+}
+
+
+function ocultarMensaje(mensaje) {
+    setTimeout(function() {
+        mensaje.classList.remove('mostrar'); 
+    }, 3000);
+}
