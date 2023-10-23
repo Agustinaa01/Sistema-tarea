@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     cargarTarea();
     cargarTareaCompleta();
     cargarUsuariosTareas();
-    bajaLogica();
 });
 
 function cargarTarea() {
@@ -15,6 +14,7 @@ function cargarTarea() {
             agregarEventoAceptar();
             cambiarEstadoTerminado();
             editarTarea();
+            bajaLogica();
         },
         error: function (error) {
             console.error("Error al cargar la tabla de tareas:", error);
@@ -29,6 +29,7 @@ function cargarTareaCompleta() {
         dataType: 'html',
         success: function (data) {
             document.getElementById("taskTableBody-complete").innerHTML = data;
+            bajaLogica();
         },
         error: function (error) {
             console.error("Error al cargar la tabla de tareas:", error);
